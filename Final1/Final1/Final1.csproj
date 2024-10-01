@@ -67,6 +67,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\responsive.css" />
+    <Content Include="css\style.css" />
+    <Content Include="images\about-bg.png" />
+    <Content Include="images\about.png" />
+    <Content Include="images\envelope-blue.png" />
+    <Content Include="images\envelope-white.png" />
+    <Content Include="images\hams1.png" />
+    <Content Include="images\hams2.png" />
+    <Content Include="images\hero.jpg" />
+    <Content Include="images\location-blue.png" />
+    <Content Include="images\location-white.png" />
+    <Content Include="images\loros1.png" />
+    <Content Include="images\loros2.png" />
+    <Content Include="images\menu.png" />
+    <Content Include="images\mision.png" />
+    <Content Include="images\next.png" />
+    <Content Include="images\perros1.png" />
+    <Content Include="images\perros2.png" />
+    <Content Include="images\prev.png" />
+    <Content Include="images\s-1.png" />
+    <Content Include="images\s-2.png" />
+    <Content Include="images\s-3.png" />
+    <Content Include="images\slider-img.png" />
+    <Content Include="images\telephone-blue.png" />
+    <Content Include="images\telephone-white.png" />
+    <Content Include="images\tool.png" />
+    <Content Include="images\v.png" />
+    <Content Include="images\vader.ico.png" />
+    <Content Include="images\vision.png" />
+    <Content Include="index.html" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\jquery-3.4.1.min.js" />
     <Content Include="MenuAdmin.aspx" />
     <Content Include="Ofertas.aspx" />
     <Content Include="Registrate_Original.aspx" />
@@ -97,6 +130,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\style.css.map" />
+    <Content Include="css\style.scss" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

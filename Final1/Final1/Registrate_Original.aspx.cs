@@ -26,7 +26,7 @@ namespace Final1
             esto, y devolverá falso, terminando el método.*/
             if (nom_user.Text == "") 
             {
-                mensaje = "El campo usuario No debe quedar Vacio";
+                mensaje = "El campo del nombre de usuario no debe quedar vacío";
                 MostrarMsj = "<script language='javascript'>alert('" +
                     mensaje + "');<" + "/script>";
                 Response.Write(MostrarMsj);
@@ -35,7 +35,7 @@ namespace Final1
             //El siguiente condicional hace lo mismo que con el campo nom_user
             if (pass.Text == "")
             {
-                mensaje = "El campo password No debe quedar Vacio";
+                mensaje = "El campo de la contraseña no debe quedar vacío";
                 MostrarMsj = "<script language='javascript'>alert('" +
                     mensaje + "');<" + "/script>";
                 Response.Write(MostrarMsj);
@@ -55,21 +55,32 @@ namespace Final1
             //Declara un objeto booleano para conocer la validez del formulario, y manda llamar al método ValidarUsuarios()
             Boolean valido;
             valido = ValidaUsuarios();
+            Dictionary<string, string> admins = new Dictionary<string, string>
+            {
+                {"Administrador" , "12345"},
+                {"Oscar" , "jelouworld"},
+                {"Martin" , "martingpt"}
+            };
+            
             // Si el objeto valido es verdadero, ejecuta el siguiente bloque de instrucciones
             if (valido == true)
             {
                 /* Si la caja de texto nom_user tiene los caracteres "Administrador" y la caja de texto
                 pass tiene los caracteres "123"  */
-                if (nom_user.Text == "Administrador" && pass.Text == "123")
+                foreach (KeyValuePair<string,string> x in admins)
                 {
-                    //Propiedad que redirecciona a otra página
-                    Response.Redirect("MenuAdmin.aspx");
+                    if (x.Key == nom_user.Text && x.Value == pass.Text)
+                    {
+                        //Propiedad que redirecciona a otra página
+                        Response.Redirect("MenuAdmin.aspx");
+                    }
                 }
+
                 //Declaracion de un objeto booleano con valor falso
                 Boolean aceptado = false;
                 /*Objeto que contiene el nombre del servidor, el nombre de la BD y la seguridad integrada de la base de datos,
                 para conectarse con SQL*/
-                String datasource = @"Data Source=PC01\SQLEXPRESS;
+                String datasource = @"Data Source=(local);
                         Initial Catalog=bdprueba;
                         Integrated Security=True;";
 
