@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,10 +13,28 @@ namespace Final1
         {
 
         }
+
         // Declarar las siguientes variables globales en el codigo: 
 
         string mensaje = "";
         string MostrarMsj = "";
+
+        public string getMachineName()
+        {
+
+            // Obtiene el nombre del equipo
+            string nombreMaquina = Environment.MachineName;
+
+            // Muestra el nombre en la consola
+            //"El nombre de la máquina es: " +
+            return (nombreMaquina);
+
+        }
+        public void cleanFields()
+        {
+            nom_user.Text = "";
+            pass.Text = "";
+        }
 
         //Se declara y crea un método para validar los usuarios, que devuelve un dato booleano
         public Boolean ValidaUsuarios()
@@ -49,82 +66,65 @@ namespace Final1
 
         }
 
-        // Al ejecutarse el evento de click en el boton ingresar, hace lo siguiente
-        protected void btnIngresar_Click(object sender, EventArgs e)
+        public void conectSQL()
         {
-            //Declara un objeto booleano para conocer la validez del formulario, y manda llamar al método ValidarUsuarios()
-            Boolean valido;
-            valido = ValidaUsuarios();
+            String strSQL, servidor;
+            //servidor = "PC02\\SQLEXPRESS";
+            servidor = "(local)";
+
+            ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
+
+            //Creación de un diccionario que contiene el nombre de los administradores y sus contraseñas.
             Dictionary<string, string> admins = new Dictionary<string, string>
             {
                 {"Administrador" , "12345"},
                 {"Oscar" , "jelouworld"},
                 {"Martin" , "martingpt"}
             };
-            
-            // Si el objeto valido es verdadero, ejecuta el siguiente bloque de instrucciones
-            if (valido == true)
+
+            /*Recorre el diccionario comparando si el contenido de las cajas de texto nom_user y pass coinciden con algún
+            administrador guardado en el diccionario. */
+            foreach (KeyValuePair<string, string> x in admins)
             {
-                /* Si la caja de texto nom_user tiene los caracteres "Administrador" y la caja de texto
-                pass tiene los caracteres "123"  */
-                foreach (KeyValuePair<string,string> x in admins)
+                if (x.Key == nom_user.Text && x.Value == pass.Text)
                 {
-                    if (x.Key == nom_user.Text && x.Value == pass.Text)
-                    {
-                        //Propiedad que redirecciona a otra página
-                        Response.Redirect("MenuAdmin.aspx");
-                    }
+                    //Propiedad que redirecciona a otra página
+                    Response.Redirect("MenuAdmin.aspx");
                 }
+            }
 
-                //Declaracion de un objeto booleano con valor falso
-                Boolean aceptado = false;
-                /*Objeto que contiene el nombre del servidor, el nombre de la BD y la seguridad integrada de la base de datos,
-                para conectarse con SQL*/
-                String datasource = @"Data Source=(local);
-                        Initial Catalog=bdprueba;
-                        Integrated Security=True;";
+            strSQL = $"select * from usuarios where nom_user='{nom_user.Text}' and pass='{pass.Text}'";
 
-                /*Declaramos un objeto conexion de tipo SqlConnection, que nos permitirá hacer la conexion con
-                 los parámetros que contiene el objeto "datasource".*/
-                SqlConnection conexion = new SqlConnection(datasource);
-
-                /*Declaración de un objeto SqlCommand que ejecuta una consulta en la base de datos
-                 */
-                conexion.Open();
-                SqlCommand consulta = new SqlCommand("select * from usuarios where nom_user='" + nom_user.Text + "' and pass='" + pass.Text + "'", conexion);
-                /*Declara un objeto de tipo SqlDataReader que permite almacenar o leer el resultado de una 
-                consulta de manera temporal. Y ExecuteReader() es una propiedad que ejecuta la lectura 
-                de la consulta almacenada. */
-                SqlDataReader leerbd = consulta.ExecuteReader();
-
+            if (cx.ejecutarQuery(strSQL, 2))
+            {
                 /*Si la consulta toma el valor de verdadero, es decir encuentra un usuario y contraseña que sean 
                 iguales a los que están en los campos del formulario, 
-                entonces el objeto aceptado toma el valor de verdadero, en caso contrario, será falso. */
-                if (leerbd.Read() == true)
+                entonces redireccionará a Ofertas.aspx, en caso contrario, mandará un mensaje. */
+                if (cx.leerbd.Read() == true)
                 {
-                    aceptado = true;
-                }
-                else
-                {
-                    aceptado = false;
-                }
-
-                /*Si el objeto aceptado es verdadero, entonces redirecciona a la página ofertas*/
-                if (aceptado == true)
-                {
+                    cleanFields();
                     Response.Redirect("Ofertas.aspx");
-
                 }
-                /*En caso contrario, mandará un mensaje que dirá que el usuario o contraseña son incorrectos. */
                 else
                 {
                     mensaje = "USUARIO O CONTRASEÑA INCORRECTA";
-                    MostrarMsj = "<script language='javascript'>alert('" +
-                        mensaje + "');<" + "/script>";
-                    Response.Write(MostrarMsj);
-                } 
-                // Cierra la conexión
-                conexion.Close();
+                }
+            }
+            else
+            {
+                mensaje = "Error al hacer la consulta: " + cx.exception.Message;
+            }
+            Response.Write(cx.makeAlertText(mensaje));
+            cx.conexionSQL.Close();
+
+        }
+
+        // Al ejecutarse el evento de click en el boton ingresar, hace lo siguiente
+        protected void btnIngresar_Click(object sender, EventArgs e)
+        {
+            if (ValidaUsuarios())
+            {
+                conectSQL();
             }
         }
 

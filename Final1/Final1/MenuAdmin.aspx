@@ -11,16 +11,13 @@
     <form id="form1" runat="server">
         <div><center>
             <h1> Bienvenido al menú del administrador</h1> 
-            <asp:Button ID="GoToUsers" runat="server" Text="Ir a usuarios" />
+            <button><a href="empleados.aspx">Ir a empleados</a></button>
             <br />
             <br />
-            <asp:Button ID="GoToEmpl" runat="server" Text="Ir a empleados" />
+            <button><a href="proveedores.aspx">Ir a proveedores</a></button>
             <br />
             <br />
-            <asp:Button ID="GoToProd" runat="server" Text="Ir a productos" />
-            <br />
-            <br />
-            <asp:Button ID="GoToProv" runat="server" Text="Ir a proveedores" />
+            <button><a href="productos.aspx">Ir a productos</a></button>
             <br />
         </center> </div>
     </form>

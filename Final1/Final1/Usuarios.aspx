@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registrate_Original.aspx.cs" Inherits="Final1.Registrate_Original" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="Final1.Usuarios" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Autentificacion de usuarios</title>
+    <title>Registrar usuario</title>
 
 <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
@@ -22,7 +22,7 @@
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
-            <img src="images/v.png" alt=""/>
+            <img src="images/v.png" alt="" />
             <span>
               Veterinaria VetPet
             </span>
@@ -61,17 +61,27 @@
           <form action="" id="form1" runat="server">
             <div class="text-center">
               <h3>
-                Inicia sesión
+                Regístrate
               </h3>
             </div>
             <div>
-              <asp:TextBox ID="nom_user" runat="server" placeholder="Nombre"></asp:TextBox>
+                <asp:TextBox placeholder="Nombre" autofocus pattern="^[\D ]{1,50}$" ID="nombre" runat="server" title="maximo 50 caracteres"></asp:TextBox>
             </div>
             <div>
-              <asp:TextBox ID="pass" runat="server" placeholder="Contraseña"></asp:TextBox>
+                <asp:TextBox placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="correo" runat="server" title="debe contener un @ y uno o varios ."></asp:TextBox>
+            </div>
+            <div>
+                <asp:TextBox placeholder="Edad" ID="edad"  runat="server" title="edad" TextMode="Number" min="1"></asp:TextBox>
+            </div>
+            <div>
+                <asp:TextBox placeholder="Nombre de usuario" pattern="^[\w ]{1,20}" ID="nom_user" runat="server" title="maximo 20 caracteres"></asp:TextBox>
+            </div>
+            <div>
+                <asp:TextBox placeholder="Contraseña" ID="psw" pattern="^[\w ]{1,10}" runat="server" title="maximo 10 caracteres"></asp:TextBox>
+                <br />
             </div>
             <div class="d-flex justify-content-center">
-              <asp:Button ID="btnIngresar" class="btnEnviar" OnClick="btnIngresar_Click" runat="server" Text="Iniciar Sesion" />
+              <asp:Button ID="btnRegistrar" class="btnEnviar" runat="server" OnClick="btnRegistrar_Click" Text="Registrar" />
             </div>
           </form>
         </div>
@@ -86,11 +96,11 @@
         <a href="#">
           <div class="item ">
             <div class="img-box box-1">
-              <img src="" alt="">
+              <img src="" alt="" />
             </div>
             <div class="detail-box">
               <p>
-                <b> Dirección: </b> <br>
+                <b> Dirección: </b> <br/>
                 Héroe Inmortal #630, Morelos I. Aguascalientes, Aguascalientes.
               </p>
             </div>
@@ -114,7 +124,7 @@
         <a href="#">
           <div class="item ">
             <div class="img-box box-3">
-              <img src="" alt="">
+              <img src="" alt=""/>
             </div>
             <div class="detail-box">
               <p>

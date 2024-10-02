@@ -70,6 +70,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\style.css" />
+    <Content Include="empleados.aspx" />
     <Content Include="images\about-bg.png" />
     <Content Include="images\about.png" />
     <Content Include="images\envelope-blue.png" />
@@ -102,10 +103,21 @@
     <Content Include="js\jquery-3.4.1.min.js" />
     <Content Include="MenuAdmin.aspx" />
     <Content Include="Ofertas.aspx" />
+    <Content Include="productos.aspx" />
+    <Content Include="proveedores.aspx" />
     <Content Include="Registrate_Original.aspx" />
+    <Content Include="Usuarios.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="conexion.cs" />
+    <Compile Include="empleados.aspx.cs">
+      <DependentUpon>empleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="empleados.aspx.designer.cs">
+      <DependentUpon>empleados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MenuAdmin.aspx.cs">
       <DependentUpon>MenuAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -120,13 +132,34 @@
     <Compile Include="Ofertas.aspx.designer.cs">
       <DependentUpon>Ofertas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="productos.aspx.cs">
+      <DependentUpon>productos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productos.aspx.designer.cs">
+      <DependentUpon>productos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="proveedores.aspx.cs">
+      <DependentUpon>proveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="proveedores.aspx.designer.cs">
+      <DependentUpon>proveedores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registrate_Original.aspx.cs">
       <DependentUpon>Registrate_Original.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Registrate_Original.aspx.designer.cs">
       <DependentUpon>Registrate_Original.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
