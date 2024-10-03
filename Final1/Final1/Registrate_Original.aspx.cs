@@ -18,18 +18,6 @@ namespace Final1
 
         string mensaje = "";
         string MostrarMsj = "";
-
-        public string getMachineName()
-        {
-
-            // Obtiene el nombre del equipo
-            string nombreMaquina = Environment.MachineName;
-
-            // Muestra el nombre en la consola
-            //"El nombre de la máquina es: " +
-            return (nombreMaquina);
-
-        }
         public void cleanFields()
         {
             nom_user.Text = "";
@@ -68,7 +56,7 @@ namespace Final1
 
         public void conectSQL()
         {
-            String strSQL, servidor;
+            String strSQL, servidor=null;
             //servidor = "PC02\\SQLEXPRESS";
             servidor = "(local)";
 
@@ -94,7 +82,7 @@ namespace Final1
             }
 
             strSQL = $"select * from usuarios where nom_user='{nom_user.Text}' and pass='{pass.Text}'";
-
+            cx.Open();
             if (cx.ejecutarQuery(strSQL, 2))
             {
                 /*Si la consulta toma el valor de verdadero, es decir encuentra un usuario y contraseña que sean 
@@ -115,8 +103,7 @@ namespace Final1
                 mensaje = "Error al hacer la consulta: " + cx.exception.Message;
             }
             Response.Write(cx.makeAlertText(mensaje));
-            cx.conexionSQL.Close();
-
+            cx.Close();
         }
 
         // Al ejecutarse el evento de click en el boton ingresar, hace lo siguiente

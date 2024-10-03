@@ -65,7 +65,7 @@
               </h3>
             </div>
             <div>
-              <asp:TextBox ID="nom_user" runat="server" placeholder="Nombre"></asp:TextBox>
+              <asp:TextBox ID="nom_user" runat="server" placeholder="Nombre de Usuario"></asp:TextBox>
             </div>
             <div>
               <asp:TextBox ID="pass" runat="server" placeholder="Contraseña"></asp:TextBox>
