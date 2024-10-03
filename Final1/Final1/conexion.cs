@@ -11,6 +11,7 @@ namespace Final1
         //objetos necesarios para la conexion y el insert
         public SqlConnection conexionSQL;
         public SqlCommand comandosSQL;
+        public string otroMess;
         public Exception exception;
         public SqlDataReader leerbd;
 
@@ -21,19 +22,34 @@ namespace Final1
                 Console.WriteLine("SERVIDOR =NULL");
                 servidor = this.getMachineName() + "\\SQLEXPRESS";
             }
+            if (servidor == "(local)")
+            {
+                servidor += "\\SQLEXPRESS";
+            }
 
             this.conectar(db, servidor);
         }
 
+        public void Open()
+        {
+            this.conexionSQL.Open();
+        }
+        public void Close()
+        {
+            this.conexionSQL.Close();
+        }
         public bool ejecutarQuery(string strSQL, int modo = 1)
         {
             //modos:
             //    1----insert
             //    2----select
+            otroMess = "";
             bool result;
+            bool failedOpen=true;
             try
             {
-                this.conexionSQL.Open();
+                
+                failedOpen=false;
                 this.comandosSQL = new System.Data.SqlClient.SqlCommand(strSQL, this.conexionSQL);
 
                 if (modo == 2)
@@ -51,12 +67,13 @@ namespace Final1
             catch (Exception ex)
             {
                 Console.WriteLine("CONSULTA FALLIDA" + ex.Message);
+                
                 this.exception = ex;
+                
                 result = false;
-            }
-            if (modo == 1)
-            {
-                this.conexionSQL.Close();
+                if (failedOpen) {
+                    otroMess = "error en el open";
+                }
             }
 
             return result;
@@ -90,7 +107,7 @@ namespace Final1
         }
         public string makeAlertText(string messaje)
         {
-            return $"<script>alert(`{messaje}`)</script>";
+            return $"<script>alert(`{messaje}#__{otroMess}`)</script>";
         }
 
         public SqlDataReader getReader()

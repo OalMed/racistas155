@@ -83,11 +83,11 @@ namespace Final1
             //servidor = "PC02\\SQLEXPRESS";
             servidor = "(local)";
 
-            ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
+            ConexionSQL cx = new ConexionSQL("bdprueba");
 
             strSQL = "INSERT INTO usuarios " +
                 $"VALUES('{nombre.Text}','{correo.Text}',{edad.Text},'{nom_user.Text}','{psw.Text}')";
-
+            cx.Open();
             if (cx.ejecutarQuery(strSQL))
             {
                 //consulta exitosa
@@ -101,7 +101,7 @@ namespace Final1
                 mensaje = "Error al Guardar el mensaje" + cx.exception.Message;
             }
             Response.Write(cx.makeAlertText(mensaje));
-            cx.conexionSQL.Close();
+            cx.Close();
 
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)

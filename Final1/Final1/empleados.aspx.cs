@@ -15,17 +15,6 @@ namespace Final1
             TextBox[] campos = { nombre, dir, tel, email, puesto, turno, sueldo, fecha };
             this.campos = campos;
         }
-        public string getMachineName()
-        {
-
-            // Obtiene el nombre del equipo
-            string nombreMaquina = Environment.MachineName;
-
-            // Muestra el nombre en la consola
-            //"El nombre de la máquina es: " +
-            return (nombreMaquina);
-
-        }
         public Boolean ValidarCampos()
         {
             string mensaje = "";
@@ -87,6 +76,7 @@ namespace Final1
 
             strSQL = "INSERT INTO empleados " +
                 $"VALUES('{nombre.Text}','{dir.Text}',{tel.Text},'{email.Text}','{puesto.Text}','{turno.Text}',{sueldo.Text},'{fecha.Text}')";
+            cx.Open();
 
             if (cx.ejecutarQuery(strSQL))
             {
@@ -100,7 +90,7 @@ namespace Final1
                 mensaje = "Error al Guardar el mensaje" + cx.exception.Message;
             }
             Response.Write(cx.makeAlertText(mensaje));
-            cx.conexionSQL.Close();
+            cx.Close();
 
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
