@@ -11,13 +11,13 @@ namespace Final1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         // Declarar las siguientes variables globales en el codigo: 
 
         string mensaje = "";
         string MostrarMsj = "";
+        //HttpCookie cookie = new HttpCookie("userInfo");
 
         public string getMachineName()
         {
@@ -88,6 +88,16 @@ namespace Final1
             {
                 if (x.Key == nom_user.Text && x.Value == pass.Text)
                 {
+                    /*if (Request.Cookies["userInfo"] != null)
+                    {
+                        HttpCookie cookie2 = Request.Cookies["userInfo"];
+                        cookie2.Values.Remove("user");
+                        Response.Cookies.Add(cookie2);
+                    }
+                    //Creación de una cookie para manejar las sesiones de forma simple
+                    this.cookie["admin"] = nom_user.Text;
+                    Response.Cookies.Add(cookie);*/
+
                     //Propiedad que redirecciona a otra página
                     Response.Redirect("MenuAdmin.aspx");
                 }
@@ -102,6 +112,15 @@ namespace Final1
                 entonces redireccionará a Ofertas.aspx, en caso contrario, mandará un mensaje. */
                 if (cx.leerbd.Read() == true)
                 {
+                    /*if (Request.Cookies["userInfo"] != null)
+                    {
+                        HttpCookie cookie2 = Request.Cookies["userInfo"];
+                        cookie2.Values.Remove("admin");
+                        Response.Cookies.Add(cookie2);
+                    }
+                    this.cookie["user"] = nom_user.Text;
+                    Response.Cookies.Add(cookie);*/
+
                     cleanFields();
                     Response.Redirect("Ofertas.aspx");
                 }

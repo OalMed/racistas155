@@ -13,5 +13,20 @@ namespace Final1
         {
 
         }
+
+        protected void btnGoToEmp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("empleados.aspx");
+        }
+
+        protected void btnGoToProv_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("proveedores.aspx");
+        }
+
+        protected void btnGoToProd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("productos.aspx");
+        }
     }
 }
