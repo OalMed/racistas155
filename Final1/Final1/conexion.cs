@@ -22,10 +22,10 @@ namespace Final1
                 Console.WriteLine("SERVIDOR =NULL");
                 servidor = this.getMachineName() + "\\SQLEXPRESS";
             }
-            if (servidor == "(local)")
+            /*if (servidor == "(local)")
             {
                 servidor += "\\SQLEXPRESS";
-            }
+            }*/
 
             this.conectar(db, servidor);
         }

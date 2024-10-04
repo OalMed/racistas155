@@ -47,7 +47,7 @@ body {
   position: absolute;
   width: 100%;
   height: 15px;
-  background-color: #023b48;
+  background-color: #2b4c7e;
 }
 
 .sub_page .hero_area {
@@ -135,7 +135,7 @@ a:focus {
 }
 
 .navbar-brand img {
-  width: 30px;
+  width: 40%;
   margin-right: 5px;
 }
 
@@ -163,10 +163,10 @@ a:focus {
 /*end header section*/
 /* slider section */
 .slider_section {
-  background-image: url(../images/hero.jpg);
   padding: 6% 0;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: rgba(86,126,187,0.7);
+  /*background-size: cover;
+  background-repeat: no-repeat;*/
 }
 
 .slider_section .row {
@@ -220,11 +220,11 @@ a:focus {
 }
 
 .slider_img-box {
-  margin-right: 5%;
+  margin: 0 5%;
 }
 
 .slider_img-box img {
-  width: 100%;
+  width: 60%;
 }
 
 .carousel-indicators {
@@ -475,21 +475,21 @@ a:focus {
 .map_section .form_container .btnEnviar {
     display: inline-block;
     padding: 12px 20px;
-    background-color: #023b48;
-    border: 1px solid #023b48;
+    background-color: #243a69;
+    border: 1px solid #243a69;
     color: #ffffff;
     border-radius: 30px;
     width: 100%;
     margin-top: 35px;
 }
 
-.map_section .form_container .btnEnviar:hover {
-    background-color: transparent;
-    color: #023b48;
-}
+    .map_section .form_container .btnEnviar:hover {
+        background-color: transparent;
+        color: #243a69;
+    }
 
 .info_section {
-  background-color: #0dc3ff;
+  background-color: #2b4c7e;
 }
 
 .info_items {

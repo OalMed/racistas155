@@ -83,7 +83,7 @@ namespace Final1
             //servidor = "PC02\\SQLEXPRESS";
             servidor = "(local)";
 
-            ConexionSQL cx = new ConexionSQL("bdprueba");
+            ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
 
             strSQL = "INSERT INTO usuarios " +
                 $"VALUES('{nombre.Text}','{correo.Text}',{edad.Text},'{nom_user.Text}','{psw.Text}')";

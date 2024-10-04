@@ -22,9 +22,9 @@
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
-            <img src="images/v.png" alt=""/>
+            <img src="images/P2P.png" alt=""/>
             <span>
-              Veterinaria VetPet
+              Peer to peer
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -85,28 +85,15 @@
       <div class="info_items">
         <a href="#">
           <div class="item ">
-            <div class="img-box box-1">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                <b> Dirección: </b> <br>
-                Héroe Inmortal #630, Morelos I. Aguascalientes, Aguascalientes.
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="#">
-          <div class="item ">
             <div class="img-box box-2">
               <img src="" alt="">
             </div>
             <div class="detail-box">
               <p>
                 <b> Contactos: </b><br>
-                Citas: 449-560-4100 <br>
-                WhatsApp: 449-214-2135 <br>
-                Urgencias 24 h: 449-654-1206
+                WhatsApp: 449-214-2135 <br />
+                Facebook: PeerToPeer <br />
+                Instagram: Peer2Peer
               </p>
             </div>
           </div>
@@ -118,7 +105,7 @@
             </div>
             <div class="detail-box">
               <p>
-                vetpet@gmail.com
+                peertopeer@dgeti.mx
               </p>
             </div>
           </div>
