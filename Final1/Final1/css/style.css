@@ -483,13 +483,18 @@ a:focus {
     margin-top: 35px;
 }
 
-    .map_section .form_container .btnEnviar:hover {
-        background-color: transparent;
-        color: #243a69;
-    }
+.map_section .form_container .btnEnviar:hover {
+    background-color: transparent;
+    color: #243a69;
+}
+
+.map_section .form_container .accion {
+    max-width: 28%;
+    margin-top: 5px !important;
+}
 
 .info_section {
-  background-color: #2b4c7e;
+    background-color: #2b4c7e;
 }
 
 .info_items {

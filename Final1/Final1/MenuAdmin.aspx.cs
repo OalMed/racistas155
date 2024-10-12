@@ -28,5 +28,10 @@ namespace Final1
         {
             Response.Redirect("productos.aspx");
         }
+        protected void btnGoToUser_CLick(object sender, EventArgs e)
+        {
+            Response.Redirect("usuariosAdmin.aspx");
+        }
+
     }
 }

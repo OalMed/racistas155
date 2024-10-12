@@ -109,6 +109,7 @@
     <Content Include="proveedores.aspx" />
     <Content Include="Registrate_Original.aspx" />
     <Content Include="Usuarios.aspx" />
+    <Content Include="usuariosAdmin.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,13 @@
     </Compile>
     <Compile Include="Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usuariosAdmin.aspx.cs">
+      <DependentUpon>usuariosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usuariosAdmin.aspx.designer.cs">
+      <DependentUpon>usuariosAdmin.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

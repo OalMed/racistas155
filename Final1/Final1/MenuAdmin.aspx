@@ -70,6 +70,9 @@
             <div class="d-flex justify-content-center">
               <asp:Button ID="btnGoToProd" class="btnEnviar" runat="server" OnClick="btnGoToProd_Click" Text="Ir a productos" />
             </div>
+            <div class="d-flex justify-content-center">
+                  <asp:Button ID="btnGoToUser" class="btnEnviar" runat="server" OnClick="btnGoToUser_Click" Text="Ir a usuarios" />
+            </div>
       </form>
     </div>
     </div>  

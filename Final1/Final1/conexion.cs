@@ -22,10 +22,10 @@ namespace Final1
                 Console.WriteLine("SERVIDOR =NULL");
                 servidor = this.getMachineName() + "\\SQLEXPRESS";
             }
-            /*if (servidor == "(local)")
+            if (servidor == "(local)")
             {
                 servidor += "\\SQLEXPRESS";
-            }*/
+            }
 
             this.conectar(db, servidor);
         }
@@ -55,6 +55,10 @@ namespace Final1
                 if (modo == 2)
                 {
                     this.leerbd = comandosSQL.ExecuteReader();
+                }
+                else if (modo == 3)
+                {
+                    this.comandosSQL.ExecuteScalar();
                 }
                 else
                 {
@@ -90,7 +94,7 @@ namespace Final1
                 //$"User:{usuario}" +
                 //$"Pasword={psw}"
 
-                "Integrated Security=True;";// coinfiguracion de seguridad
+                "Integrated Security=True;";// configuracion de seguridad
 
             this.conexionSQL = new SqlConnection(strConexion);
         }
