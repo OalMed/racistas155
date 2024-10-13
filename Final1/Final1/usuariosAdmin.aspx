@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Consultar usuarios</title>
     <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -21,7 +21,7 @@
   <header class="header_section">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="indexAdmin.html">
           <img src="images/P2P.png" alt=""/>
           <span>
             Peer to peer
@@ -36,13 +36,13 @@
           <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="indexAdmin.html">Inicio <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Usuarios.aspx">Regístrate</a>
+                <a class="nav-link" href="MenuAdmin.aspx">Administrar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Registrate_Original.aspx">Iniciar sesión</a>
+                <a class="nav-link" href="Registrate_Original.aspx">Cerrar sesión</a>
               </li>
             </ul>
           </div>
@@ -66,24 +66,24 @@
           </div>
           
           <div>
-            <asp:TextBox placeholder="ID del usuario" type="Number" autofocus ID="txtIdUser" runat="server" title="Ingrese un ID"></asp:TextBox>
+            <asp:TextBox placeholder="Buscar usuario por ID" type="Number" autofocus ID="txtIdUser" runat="server" min="1" title="Ingrese un ID"></asp:TextBox>
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnBuscar_Click" ID="btnBuscar" Text="Buscar"/>
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnEliminar_Click" ID="btnEliminar" Text="Eliminar"/>
           </div>
           <div>
-              <asp:TextBox placeholder="Nombre" pattern="^[\D ]{1,50}$" ID="nombre" runat="server" title="maximo 50 caracteres"></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="Nombre" pattern="^[\D ]{1,50}$" ID="nombre" runat="server" title="maximo 50 caracteres"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="correo" runat="server" title="debe contener un @ y uno o varios ."></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="correo" runat="server" title="debe contener un @ y uno o varios ."></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox placeholder="Edad" ID="edad"  runat="server" title="edad" TextMode="Number" min="1"></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="Edad" ID="edad" runat="server" title="edad" TextMode="Number" min="1"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox placeholder="Nombre de usuario" pattern="^[\w ]{1,20}" ID="nom_user" runat="server" title="maximo 20 caracteres"></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="Nombre de usuario" pattern="^[\w ]{1,20}" ID="nom_user" runat="server" title="maximo 20 caracteres"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox placeholder="Contraseña" ID="psw" pattern="^[\w ]{1,10}" runat="server" title="maximo 10 caracteres"></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="Contraseña" ID="psw" pattern="^[\w ]{1,10}" runat="server" title="maximo 10 caracteres"></asp:TextBox>
               <br />
           </div>
           <%--<div class="d-flex justify-content-center">

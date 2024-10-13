@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Final1
 {
@@ -11,9 +12,12 @@ namespace Final1
         //objetos necesarios para la conexion y el insert
         public SqlConnection conexionSQL;
         public SqlCommand comandosSQL;
+        public SqlDataAdapter adapter;
         public string otroMess;
         public Exception exception;
         public SqlDataReader leerbd;
+        public Object existe;
+        public DataSet datos;
 
         public ConexionSQL(string db, string servidor = null)
         {
@@ -22,10 +26,10 @@ namespace Final1
                 Console.WriteLine("SERVIDOR =NULL");
                 servidor = this.getMachineName() + "\\SQLEXPRESS";
             }
-            if (servidor == "(local)")
+            /*if (servidor == "(local)")
             {
                 servidor += "\\SQLEXPRESS";
-            }
+            }*/
 
             this.conectar(db, servidor);
         }
@@ -43,6 +47,8 @@ namespace Final1
             //modos:
             //    1----insert
             //    2----select
+            //    3----select con ExecuteScalar()
+            //    4----select con SqlDataAdapter y DataSet
             otroMess = "";
             bool result;
             bool failedOpen=true;
@@ -50,7 +56,7 @@ namespace Final1
             {
                 
                 failedOpen=false;
-                this.comandosSQL = new System.Data.SqlClient.SqlCommand(strSQL, this.conexionSQL);
+                this.comandosSQL = new SqlCommand(strSQL, this.conexionSQL);
 
                 if (modo == 2)
                 {
@@ -58,13 +64,20 @@ namespace Final1
                 }
                 else if (modo == 3)
                 {
-                    this.comandosSQL.ExecuteScalar();
+                    this.existe = new Object();
+                    this.existe = this.comandosSQL.ExecuteScalar();
+                }
+                else if (modo == 4)
+                {
+                    this.datos = new DataSet();
+                    this.adapter = new SqlDataAdapter(this.comandosSQL);
+                    this.adapter.Fill(this.datos, "usuarios");
                 }
                 else
                 {
                     this.comandosSQL.ExecuteNonQuery();
-
                 }
+
                 Console.WriteLine("CONSULTA EXITOSA");
                 result = true;
             }
