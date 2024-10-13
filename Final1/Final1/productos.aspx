@@ -73,7 +73,7 @@
             <asp:TextBox placeholder="Marca" maxlength="30" ID="marca" runat="server" title="maximo 30 caracteres"></asp:TextBox>
           </div>
           <div>
-            <asp:TextBox placeholder="Precio"  ID="precio" runat="server" type="number"></asp:TextBox>
+            <asp:TextBox placeholder="Precio"  ID="precio" runat="server" step="0.001" type="number"></asp:TextBox>
           </div>
           <div>
             <asp:TextBox placeholder="Existencias"  ID="exist" runat="server" type="number"></asp:TextBox>

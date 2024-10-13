@@ -69,7 +69,7 @@
             <asp:TextBox placeholder="Dirección" maxlength="70" ID="dir" runat="server" title="maximo 70 caracteres"></asp:TextBox>
           </div>
           <div>
-            <asp:TextBox placeholder="Teléfono" type="number" maxlength="10" ID="tel" runat="server" title="maximo 10 caracteres"></asp:TextBox>
+            <asp:TextBox placeholder="Teléfono" type="tel" ID="tel" runat="server" title="maximo 10 caracteres"></asp:TextBox>
           </div>
           <div>
             <asp:TextBox type="email" placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="email" runat="server" title="maximo 60 caracteres"></asp:TextBox>
@@ -130,4 +130,8 @@
     </div>
   </section>
 </body>
+
+<script>
+        document.getElementById("fecha").value=new Date().toISOString().split("T")[0]
+</script>
 </html>

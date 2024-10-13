@@ -71,10 +71,10 @@
             <asp:TextBox placeholder="Dirección" maxlength="100" ID="dir" runat="server" title="maximo 100 caracteres"></asp:TextBox>
           </div>
           <div>
-            <asp:TextBox placeholder="Teléfono" type="number" maxlength="10" ID="tel" runat="server" title="maximo 10 caracteres"></asp:TextBox>
+            <asp:TextBox placeholder="Teléfono" type="tel" ID="tel" runat="server" title="maximo 10 caracteres"></asp:TextBox>
           </div>
           <div>
-            <asp:TextBox type="email" placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="email" runat="server" title="maximo 70 caracteres"></asp:TextBox>
+            <asp:TextBox type="email" MaxLength="70" placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="email" runat="server" title="maximo 70 caracteres"></asp:TextBox>
           </div>
           <div>
             <asp:TextBox placeholder="Puesto" maxlength="20" ID="puesto" runat="server" title="maximo 20 caracteres"></asp:TextBox>
@@ -83,7 +83,7 @@
             <asp:TextBox placeholder="Turno" maxlength="10" ID="turno" runat="server" title="maximo 10 caracteres"></asp:TextBox>
           </div>
           <div>
-            <asp:TextBox placeholder="Sueldo"  ID="sueldo" runat="server" type="number"></asp:TextBox>
+            <asp:TextBox placeholder="Sueldo"  ID="sueldo" runat="server" type="number" step="0.001"></asp:TextBox>
           </div>
           <div>
             <asp:TextBox type="date" placeholder="Fecha de ingreso" ID="fecha" runat="server"></asp:TextBox>
@@ -132,4 +132,8 @@
     </div>
   </section>
 </body>
+
+    <script>
+        document.getElementById("fecha").value=new Date().toISOString().split("T")[0]
+    </script>
 </html>
