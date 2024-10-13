@@ -9,8 +9,24 @@ namespace Final1
 {
     public partial class Registrate_Original : System.Web.UI.Page
     {
+        ConexionSQL cx;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            String servidor = null;
+            //servidor = "PC02\\SQLEXPRESS";
+            //servidor = "local\\SQLEXPRESS";
+            servidor = null;
+            cx = new ConexionSQL("bdprueba", servidor);
+
+            //if (cx.Open())
+            //{
+            //    Response.Write(cx.makeAlertText("conexion abierta"));
+            //    cx.Close();
+            //}
+            //else{
+            //    Response.Write(cx.makeAlertText($"error al abrir: {cx.exception.Message}"));
+            //}
         }
 
         // Declarar las siguientes variables globales en el codigo: 
@@ -55,12 +71,6 @@ namespace Final1
 
         public void conectSQL()
         {
-            String strSQL, servidor=null;
-            //servidor = "PC02\\SQLEXPRESS";
-            servidor = "(local)";
-
-            ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
-
             //Creación de un diccionario que contiene el nombre de los administradores y sus contraseñas.
             Dictionary<string, string> admins = new Dictionary<string, string>
             {
@@ -89,9 +99,10 @@ namespace Final1
                     Response.Redirect("MenuAdmin.aspx");
                 }
             }
+            String strSQL;
 
             strSQL = $"select * from usuarios where nom_user='{nom_user.Text}' and pass='{pass.Text}'";
-            cx.Open();
+            cx.conexionSQL.Open();
             if (cx.ejecutarQuery(strSQL, 2))
             {
                 /*Si la consulta toma el valor de verdadero, es decir encuentra un usuario y contraseña que sean 

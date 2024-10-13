@@ -13,17 +13,6 @@ namespace Final1
         {
             //lblMensaje.Visible = false;
         }
-        public string getMachineName()
-        {
-
-            // Obtiene el nombre del equipo
-            string nombreMaquina = Environment.MachineName;
-
-            // Muestra el nombre en la consola
-            //"El nombre de la máquina es: " +
-            return (nombreMaquina);
-
-        }
         public Boolean ValidarCampos()
         {
             string mensaje = "";
@@ -79,9 +68,9 @@ namespace Final1
         }
         public void conectSQL()
         {
-            String strSQL, servidor, mensaje = "";
+            String strSQL, servidor =null, mensaje = "";
             //servidor = "PC02\\SQLEXPRESS";
-            servidor = "(local)";
+            //servidor = "(local)";
 
             ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
 

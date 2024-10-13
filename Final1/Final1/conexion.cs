@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
+using System.Diagnostics;
 
 namespace Final1
 {
@@ -13,30 +15,49 @@ namespace Final1
         public SqlConnection conexionSQL;
         public SqlCommand comandosSQL;
         public SqlDataAdapter adapter;
-        public string otroMess;
         public Exception exception;
         public SqlDataReader leerbd;
         public Object existe;
         public DataSet datos;
-
+        string ruta = "C:\\Program Files\\Microsoft SQL Server\\MSSQL16.SQLEXPRESS";
+        string servidor = "";
         public ConexionSQL(string db, string servidor = null)
         {
+
             if (servidor == null)
             {
                 Console.WriteLine("SERVIDOR =NULL");
-                servidor = this.getMachineName() + "\\SQLEXPRESS";
+                //servidor = "local";
+                servidor = getMachineName();
+                if (Directory.Exists(this.ruta))
+                {
+                    servidor+= "\\SQLEXPRESS";
+                    //servidor = this.getMachineName() + "\\SQLEXPRESS";
+                }
+                else
+                {
+                    servidor = "(local)";
+                }
             }
             /*if (servidor == "(local)")
             {
                 servidor += "\\SQLEXPRESS";
             }*/
-
+            this.servidor = servidor;
+            Debug.WriteLine(servidor);
             this.conectar(db, servidor);
         }
 
-        public void Open()
+        public bool Open()
         {
-            this.conexionSQL.Open();
+            try
+            {
+                this.conexionSQL.Open();
+                return true;
+            }catch( Exception ex){
+                exception = ex;
+                return false;
+            }
         }
         public void Close()
         {
@@ -49,13 +70,8 @@ namespace Final1
             //    2----select
             //    3----select con ExecuteScalar()
             //    4----select con SqlDataAdapter y DataSet
-            otroMess = "";
-            bool result;
-            bool failedOpen=true;
             try
             {
-                
-                failedOpen=false;
                 this.comandosSQL = new SqlCommand(strSQL, this.conexionSQL);
 
                 if (modo == 2)
@@ -79,21 +95,16 @@ namespace Final1
                 }
 
                 Console.WriteLine("CONSULTA EXITOSA");
-                result = true;
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("CONSULTA FALLIDA" + ex.Message);
                 
                 this.exception = ex;
-                
-                result = false;
-                if (failedOpen) {
-                    otroMess = "error en el open";
-                }
-            }
 
-            return result;
+                return false;
+            }
         }
 
         public void conectar(string db, string servidor)
@@ -109,6 +120,7 @@ namespace Final1
 
                 "Integrated Security=True;";// configuracion de seguridad
 
+            Debug.WriteLine(strConexion);
             this.conexionSQL = new SqlConnection(strConexion);
         }
         public string getMachineName()
@@ -124,7 +136,7 @@ namespace Final1
         }
         public string makeAlertText(string messaje)
         {
-            return $"<script>alert(`{messaje}#__{otroMess}`)</script>";
+            return $"<script>alert(`{messaje}`)</script>";
         }
 
         public SqlDataReader getReader()

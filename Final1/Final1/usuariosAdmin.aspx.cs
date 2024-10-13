@@ -9,9 +9,11 @@ namespace Final1
 {
     public partial class usuariosAdmin : System.Web.UI.Page
     {
+        ConexionSQL cx;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            cx = new ConexionSQL("bdprueba");
+            //cx = new ConexionSQL("bdprueba", "(local)");
         }
         String strSQL, mensaje = "";
 
@@ -26,9 +28,7 @@ namespace Final1
         }
 
         public Boolean Buscar()
-        {
-            ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
-
+        {            
             strSQL = $"SELECT * FROM usuarios WHERE id_user = {txtIdUser.Text}";
             cx.Open();
 
@@ -36,7 +36,7 @@ namespace Final1
             {
                 if (cx.existe != null)
                 {
-                    cx.Close();
+                    //cx.Close();
                     return true;
                 } else
                 {
@@ -57,11 +57,12 @@ namespace Final1
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            cx.Open();
             if (Valido())
             {
-                ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
+                //ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
                 strSQL = $"EXEC Bajas {txtIdUser.Text}";
-                cx.Open();
+                //cx.Open();
 
                 if (cx.ejecutarQuery(strSQL))
                 {
@@ -83,11 +84,12 @@ namespace Final1
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            cx.Open();
             if (Buscar())
             {
-                ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
+                //ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
                 strSQL = $"SELECT * FROM usuarios WHERE id_user = {txtIdUser.Text}";
-                cx.Open();
+                //cx.Open();
 
                 if (cx.ejecutarQuery(strSQL, 4))
                 {

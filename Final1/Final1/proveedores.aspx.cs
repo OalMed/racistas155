@@ -10,8 +10,13 @@ namespace Final1
     public partial class proveedores : System.Web.UI.Page
     {
         TextBox[] campos;
+        ConexionSQL cx;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string servidor = null;
+            //servidor= "(local)";
+            cx = new ConexionSQL("bdprueba", servidor);
+
             TextBox[] campos = { nombre, dir, tel, email, tipoProduc, marca, fecha };
             this.campos = campos;
         }
@@ -68,11 +73,9 @@ namespace Final1
         }
         public void conectSQL()
         {
-            String strSQL, servidor, mensaje = "";
+            String strSQL, mensaje = "";
             //servidor = "PC02\\SQLEXPRESS";
-            servidor = "(local)";
-
-            ConexionSQL cx = new ConexionSQL("bdprueba", servidor);
+            
 
             strSQL = "INSERT INTO proveedores " +
                 $"VALUES('{nombre.Text}','{dir.Text}',{tel.Text},'{email.Text}','{tipoProduc.Text}','{marca.Text}','{fecha.Text}')";
