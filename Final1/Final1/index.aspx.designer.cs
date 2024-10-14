@@ -11,25 +11,34 @@ namespace Final1
 {
 
 
-    public partial class Ofertas
+    public partial class index
     {
 
         /// <summary>
-        /// Control formContainer.
+        /// Control nom_user.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formContainer;
+        protected global::System.Web.UI.WebControls.TextBox nom_user;
 
         /// <summary>
-        /// Control cerrar.
+        /// Control pass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton cerrar;
+        protected global::System.Web.UI.WebControls.TextBox pass;
+
+        /// <summary>
+        /// Control btnIngresar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnIngresar;
     }
 }

@@ -3,16 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+//using System.Web.UI.WebControl;
 
 namespace Final1
 {
-    public partial class Registrate_Original : System.Web.UI.Page
+    public partial class Registrate_Original : cookiesAdmin
     {
         ConexionSQL cx;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            HttpCookie nombre, psw;
+
+            nombre = Request.Cookies["nombre"];
+            psw = Request.Cookies["psw"];
+
+            if (!(nombre == null && psw == null))
+            {
+                //existen ambas cookies y por ende, ya habias iniciado sesion
+                //nom_user.Text = nombre.Value;
+                //pass.Text = psw.Value;
+                //conectSQL();
+
+                if (getCookieValue("admin")=="true")
+                {
+                    //es admin
+                    Response.Redirect("MenuAdmin.aspx");
+                }
+                else
+                {
+                    //no es admin
+                    Response.Redirect("Ofertas.aspx");
+                }
+            }
+
             String servidor = null;
             //servidor = "PC02\\SQLEXPRESS";
             //servidor = "local\\SQLEXPRESS";
@@ -71,6 +94,30 @@ namespace Final1
 
         public void conectSQL()
         {
+            string redir=getRedirect();
+
+            if (redir != "")
+            {
+                //calzaron los valores nombre y usuario, por lo que si existes
+                
+                createCookie("nombre", nom_user.Text);
+                createCookie("psw", pass.Text);
+
+                if(redir== "MenuAdmin.aspx")
+                {
+                    createCookie("admin", "true");
+                }
+                else
+                {
+                    createCookie("admin", "false");
+                }
+                //Response.Write("redir="+redir+"<br>nom_user="+ nom_user.Text + "<br>nombre cookie="+getCookieValue("nombre")+"<br>es admin?=" + getCookieValue("admin"));
+                Response.Redirect(redir);
+                //nom_user.Text, pass.Text
+            }
+        }
+        public string getRedirect() 
+        {
             //Creación de un diccionario que contiene el nombre de los administradores y sus contraseñas.
             Dictionary<string, string> admins = new Dictionary<string, string>
             {
@@ -96,19 +143,23 @@ namespace Final1
                     Response.Cookies.Add(cookie);*/
 
                     //Propiedad que redirecciona a otra página
-                    Response.Redirect("MenuAdmin.aspx");
+
+                    //Response.Redirect("MenuAdmin.aspx");
+                    return "MenuAdmin.aspx";
                 }
             }
             String strSQL;
 
             strSQL = $"select * from usuarios where nom_user='{nom_user.Text}' and pass='{pass.Text}'";
-            cx.conexionSQL.Open();
+            cx.Open();
             if (cx.ejecutarQuery(strSQL, 2))
             {
                 /*Si la consulta toma el valor de verdadero, es decir encuentra un usuario y contraseña que sean 
                 iguales a los que están en los campos del formulario, 
                 entonces redireccionará a Ofertas.aspx, en caso contrario, mandará un mensaje. */
-                if (cx.leerbd.Read() == true)
+                bool res = cx.leerbd.Read();
+                cx.Close();
+                if (res == true)
                 {
                     /*if (Request.Cookies["userInfo"] != null)
                     {
@@ -118,9 +169,9 @@ namespace Final1
                     }
                     this.cookie["user"] = nom_user.Text;
                     Response.Cookies.Add(cookie);*/
-
-                    cleanFields();
-                    Response.Redirect("Ofertas.aspx");
+                    return "Ofertas.aspx";
+                    //cleanFields();
+                    //Response.Redirect("Ofertas.aspx");
                 }
                 else
                 {
@@ -131,8 +182,10 @@ namespace Final1
             {
                 mensaje = "Error al hacer la consulta: " + cx.exception.Message;
             }
+
             Response.Write(cx.makeAlertText(mensaje));
-            cx.Close();
+            //cx.Close();
+            return "";
         }
 
         // Al ejecutarse el evento de click en el boton ingresar, hace lo siguiente

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Final1
 {
-    public partial class MenuAdmin : System.Web.UI.Page
+    public partial class MenuAdmin : cookiesAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,6 +32,10 @@ namespace Final1
         {
             Response.Redirect("usuariosAdmin.aspx");
         }
-
+        protected void cerrarClick(object sender, EventArgs e)
+        {
+            Response.Write(new ConexionSQL("null").makeAlertText("CERRAR"));
+            cerrarSesion();
+        }
     }
 }

@@ -15,6 +15,7 @@
 
 </head>
 <body>
+    <form action="" id="formContainer" runat="server">
       <div class="hero_area">
   <!-- header section strats -->
   <header class="header_section">
@@ -41,7 +42,7 @@
                 <a class="nav-link" href="Ofertas.aspx">Ofertas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Registrate_Original.aspx">Cerrar sesión</a>
+                  <asp:LinkButton class="nav-link" ID="cerrar" runat="server" OnClick="cerrarClick">Cerrar sesión</asp:LinkButton>
               </li>
             </ul>
           </div>
@@ -286,6 +287,7 @@
 
 </section>
 
+        </form>
     <section class="info_section layout_padding2">
     <div class="container">
       <div class="info_items">

@@ -15,6 +15,8 @@
 
 </head>
 <body>
+    <form action="" id="formContainer" runat="server">
+
           <div class="hero_area">
   <!-- header section strats -->
   <header class="header_section">
@@ -41,7 +43,7 @@
                 <a class="nav-link" href="MenuAdmin.aspx">Administrar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Registrate_Original.aspx">Cerrar sesión</a>
+                  <asp:LinkButton class="nav-link" ID="cerrar" runat="server" OnClick="cerrarClick">Cerrar sesión</asp:LinkButton>
               </li>
             </ul>
           </div>
@@ -57,28 +59,30 @@
     <div class="form_container">
     <div class="row">
     <div class="col-md-8 col-sm-10 offset-md-2">
-      <form action="" id="form1" runat="server">
-          <h2 class="custom_heading text-center">
-            Menú
-          </h2>
-            <div class="d-flex justify-content-center">
-              <asp:Button ID="btnGoToEmp" class="btnEnviar" runat="server" OnClick="btnGoToEmp_Click" Text="Ir a empleados" />
-            </div>
-            <div class="d-flex justify-content-center">
-              <asp:Button ID="btnGoToProv" class="btnEnviar" runat="server" OnClick="btnGoToProv_Click" Text="Ir a proveedores" />
-            </div>
-            <div class="d-flex justify-content-center">
-              <asp:Button ID="btnGoToProd" class="btnEnviar" runat="server" OnClick="btnGoToProd_Click" Text="Ir a productos" />
-            </div>
-            <div class="d-flex justify-content-center">
-                  <asp:Button ID="btnGoToUser" class="btnEnviar" runat="server" OnClick="btnGoToUser_Click" Text="Ir a usuarios" />
-            </div>
-      </form>
+      
+          <fieldset id="form1" >
+              <h2 class="custom_heading text-center">
+                Menú
+              </h2>
+                <div class="d-flex justify-content-center">
+                  <asp:Button ID="btnGoToEmp" class="btnEnviar" runat="server" OnClick="btnGoToEmp_Click" Text="Ir a empleados" />
+                </div>
+                <div class="d-flex justify-content-center">
+                  <asp:Button ID="btnGoToProv" class="btnEnviar" runat="server" OnClick="btnGoToProv_Click" Text="Ir a proveedores" />
+                </div>
+                <div class="d-flex justify-content-center">
+                  <asp:Button ID="btnGoToProd" class="btnEnviar" runat="server" OnClick="btnGoToProd_Click" Text="Ir a productos" />
+                </div>
+                <div class="d-flex justify-content-center">
+                      <asp:Button ID="btnGoToUser" class="btnEnviar" runat="server" OnClick="btnGoToUser_Click" Text="Ir a usuarios" />
+                </div>
+            </fieldset>
+      
     </div>
     </div>  
     </div>
     </section></center>
-
+    
     <section class="info_section layout_padding2">
     <div class="container">
       <div class="info_items">
@@ -112,6 +116,10 @@
       </div>
     </div>
   </section>
+
+
+    </form>
+
 
 </body>
 </html>

@@ -98,6 +98,7 @@
     <Content Include="images\v.png" />
     <Content Include="images\vader.ico.png" />
     <Content Include="images\vision.png" />
+    <Content Include="index.aspx" />
     <Content Include="index.html" />
     <Content Include="indexAdmin.html" />
     <Content Include="indexUser.html" />
@@ -114,12 +115,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="conexion.cs" />
+    <Compile Include="cookiesAdmin.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="empleados.aspx.cs">
       <DependentUpon>empleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="empleados.aspx.designer.cs">
       <DependentUpon>empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuAdmin.aspx.cs">
       <DependentUpon>MenuAdmin.aspx</DependentUpon>
