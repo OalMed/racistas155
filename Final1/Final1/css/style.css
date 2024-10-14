@@ -453,7 +453,7 @@ a:focus {
   z-index: 9;
 }
 
-.map_section .form_container form {
+.map_section .form_container #form1 {
   background-color: rgba(255, 255, 255, 0.98);
   padding: 45px;
   margin: 75px 0;

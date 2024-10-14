@@ -398,6 +398,7 @@ a:focus {
 // end client section
 
 // map section
+
 .map_section {
   position: relative;
   #map {
@@ -406,11 +407,6 @@ a:focus {
   .form_container {
     position: relative;
     width: 50%;
-    form {
-      background-color: rgba($color: #ffffff, $alpha: 0.98);
-      padding: 45px;
-      margin: 75px 0;
-    }
     z-index: 9;
     input {
       border: none;
