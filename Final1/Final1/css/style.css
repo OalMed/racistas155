@@ -474,7 +474,7 @@ a:focus {
 
 .map_section .form_container .btnEnviar {
     display: inline-block;
-    padding: 12px 20px;
+    padding: 12px;
     background-color: #243a69;
     border: 1px solid #243a69;
     color: #ffffff;

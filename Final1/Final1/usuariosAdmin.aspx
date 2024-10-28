@@ -58,7 +58,7 @@
   <div class="form_container">
     <div class="row">
       <div class="col-md-8 col-sm-10 offset-md-2">
-        <form action="" id="form1" runat="server">
+          <form id="form1" runat="server">
           <div class="text-center">
             <h3>
               Búsqueda de usuarios
@@ -68,28 +68,36 @@
           <div>
             <asp:TextBox placeholder="Buscar usuario por ID" type="Number" autofocus ID="txtIdUser" runat="server" min="1" title="Ingrese un ID"></asp:TextBox>
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnBuscar_Click" ID="btnBuscar" Text="Buscar"/>
-            <asp:Button class="accion btnEnviar" runat="server" OnClick="btnEliminar_Click" ID="btnEliminar" Text="Eliminar"/>
+            <asp:Button class="accion btnEnviar" runat="server" OnClick="btnUpdate_Click" ID="btnUpdate" Text="Modificar" Visible="False" />
+            <asp:Button class="accion btnEnviar" runat="server" OnClick="btnEliminar_Click" ID="btnEliminar" Text="Eliminar" Visible="False" />
           </div>
           <div>
-              <asp:TextBox ReadOnly="true" placeholder="Nombre" pattern="^[\D ]{1,50}$" ID="nombre" runat="server" title="maximo 50 caracteres"></asp:TextBox>
+              <asp:TextBox ReadOnly="true" placeholder="ID del usuario" ID="idUser" runat="server"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox ReadOnly="true" placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="correo" runat="server" title="debe contener un @ y uno o varios ."></asp:TextBox>
+              <asp:TextBox placeholder="Nombre" pattern="^[\D ]{1,50}$" ID="nombre" runat="server" title="maximo 50 caracteres"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox ReadOnly="true" placeholder="Edad" ID="edad" runat="server" title="edad" TextMode="Number" min="1"></asp:TextBox>
+              <asp:TextBox placeholder="Correo" pattern="^[\w]+@[a-zA-Z]+\.+[a-zA-Z0-9]{1,}" ID="correo" runat="server" title="debe contener un @ y uno o varios ."></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox ReadOnly="true" placeholder="Nombre de usuario" pattern="^[\w ]{1,20}" ID="nom_user" runat="server" title="maximo 20 caracteres"></asp:TextBox>
+              <asp:TextBox placeholder="Edad" ID="edad" runat="server" title="edad" TextMode="Number" min="1"></asp:TextBox>
           </div>
           <div>
-              <asp:TextBox ReadOnly="true" placeholder="Contraseña" ID="psw" pattern="^[\w ]{1,10}" runat="server" title="maximo 10 caracteres"></asp:TextBox>
+              <asp:TextBox placeholder="Nombre de usuario" pattern="^[\w ]{1,20}" ID="nom_user" runat="server" title="maximo 20 caracteres"></asp:TextBox>
+          </div>
+          <div>
+              <asp:TextBox placeholder="Contraseña" ID="psw" pattern="^[\w ]{1,10}" runat="server" title="maximo 10 caracteres"></asp:TextBox>
               <br />
           </div>
           <%--<div class="d-flex justify-content-center">
             <asp:Button ID="btnRegistrar" class="btnEnviar" runat="server" OnClick="btnRegistrar_Click" Text="Registrar" />
           </div>--%>
-        </form>
+            <div> <br />
+               <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1"></asp:GridView>
+               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bdpruebaConnectionString %>" ProviderName="<%$ ConnectionStrings:bdpruebaConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [usuarios]"></asp:SqlDataSource>
+            </div>
+          </form>
       </div>
     </div>
   </div>

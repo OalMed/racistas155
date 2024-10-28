@@ -20,11 +20,71 @@ namespace Final1
         public void CleanFields()
         {
             txtIdUser.Text = "";
+            idUser.Text = "";
             nombre.Text = "";
             correo.Text = "";
             edad.Text = "";
             nom_user.Text = "";
             psw.Text = "";
+        }
+
+        public void enableBtns()
+        {
+            btnUpdate.Visible = true;
+            btnEliminar.Visible = true;
+        }
+
+        public void disableBtns()
+        {
+            btnUpdate.Visible = false;
+            btnEliminar.Visible = false;
+        }
+
+        public Boolean ValidarCampos()
+        {
+            string mensaje = "";
+            string mostrarMsj = "";
+            TextBox[] campos = { nombre, correo, edad, nom_user, psw };
+            string[] nombres = { "el nombre", "el email", "la edad", "el nombre de usuario", "la contraseña" };
+            //Response.Write("<script>alert('EMPIEZA A VALIDAR')</script>");
+            Console.WriteLine("empieza");
+
+            int c = 0;
+            Boolean continuar = true;
+
+            while (continuar)
+            {
+                if (c >= campos.Length)
+                {
+                    continuar = false;
+                }
+                else
+                {
+                    if (campos[c].Text == "")
+                    {
+                        mensaje = nombres[c] + " no debe estar vaci";
+                        if (c == 2 || c == 4)
+                        {
+                            mensaje += "a";
+                        }
+                        else
+                        {
+                            mensaje += "o";
+                        }
+
+                        //mostrarMsj = "<script>alert('" + mensaje + "')</script>";
+                        //Response.Write(mostrarMsj);
+                        cx.makeAlertText(mensaje);
+                        continuar = false;
+
+                        //Int32.Parse("45");
+                        return false;
+                    }
+                    c += 1;
+                }
+            };
+            return true;
+
         }
 
         public Boolean Buscar()
@@ -61,7 +121,7 @@ namespace Final1
             if (Valido())
             {
                 //ConexionSQL cx = new ConexionSQL("bdprueba", "(local)");
-                strSQL = $"EXEC Bajas {txtIdUser.Text}";
+                strSQL = $"EXEC Bajas {idUser.Text}";
                 //cx.Open();
 
                 if (cx.ejecutarQuery(strSQL))
@@ -76,6 +136,7 @@ namespace Final1
                 Response.Write(cx.makeAlertText(mensaje));
                 cx.Close();
                 CleanFields();
+                Response.Redirect("usuariosAdmin.aspx");
             } else
             {
                 Response.Write("<script>alert('Ingrese un ID')</script>");
@@ -97,13 +158,15 @@ namespace Final1
                     {
                         mensaje = "Usuario encontrado";
 
+                        idUser.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["id_user"]);
                         nombre.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["nombre"]);
                         correo.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["email"]);
                         edad.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["edad"]);
                         nom_user.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["nom_user"]);
                         psw.Text = Convert.ToString(cx.datos.Tables["usuarios"].Rows[0]["pass"]);
 
-                    } 
+                    }
+                    enableBtns();
 
                 } else
                 {
@@ -115,6 +178,30 @@ namespace Final1
             } else
             {
                 CleanFields();
+                disableBtns();
+            }
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (ValidarCampos())
+            {
+                cx.Open();
+
+                strSQL = $"EXEC Modificar '{nombre.Text}', '{correo.Text}', {edad.Text}, '{nom_user.Text}', '{psw.Text}', {idUser.Text}";
+
+                if (cx.ejecutarQuery(strSQL))
+                {
+                    mensaje = "Se modificó al usuario correctamente";
+                }
+                else
+                {
+                    mensaje = $"Error al modificar el usuario: {cx.exception.Message}";
+                }
+                Response.Write(cx.makeAlertText(mensaje));
+                cx.Close();
+                CleanFields();
+                Response.Redirect("usuariosAdmin.aspx");
             }
         }
 
