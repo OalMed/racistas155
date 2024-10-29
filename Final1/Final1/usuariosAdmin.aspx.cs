@@ -222,6 +222,10 @@ namespace Final1
                 if (cx.datos.Tables["usuarios"].Rows.Count > 0)
                 {
                     GenerarPDF();
+                } else
+                {
+                    mensaje = "Incapaz de hacer el reporte, no hay usuarios registrados";
+                    Response.Write(cx.makeAlertText(mensaje));
                 }
 
             }
@@ -266,15 +270,26 @@ namespace Final1
         {
             container.Column(column =>
             {
+                column.Item().Row(row =>
+                {
+                    row.RelativeItem().Text("ID del usuario");
+                    row.RelativeItem().Text("Nombre");
+                    row.RelativeItem().Text("Correo");
+                    row.RelativeItem().Text("Edad");
+                    row.RelativeItem().Text("Nombre de usuario");
+                });
+                column.Item().PaddingVertical(5).LineHorizontal(0.5f).LineColor(Colors.Black);
+
+
                 for (int i = 0; i < cx.datos.Tables["usuarios"].Rows.Count; i++)
                 {
                     column.Item().Row(row =>
                     {
-                        row.RelativeItem().Text($"ID: {cx.datos.Tables["usuarios"].Rows[i]["id_user"]}");
-                        row.RelativeItem().Text($"Nombre: {cx.datos.Tables["usuarios"].Rows[i]["nombre"]}");
-                        row.RelativeItem().Text($"Email: {cx.datos.Tables["usuarios"].Rows[i]["email"]}");
-                        row.RelativeItem().Text($"Edad: {cx.datos.Tables["usuarios"].Rows[i]["edad"]}");
-                        row.RelativeItem().Text($"Nombre de usuario: {cx.datos.Tables["usuarios"].Rows[i]["nom_user"]}");
+                        row.RelativeItem().Text($"{cx.datos.Tables["usuarios"].Rows[i]["id_user"]}");
+                        row.RelativeItem().Text($"{cx.datos.Tables["usuarios"].Rows[i]["nombre"]}");
+                        row.RelativeItem().Text($"{cx.datos.Tables["usuarios"].Rows[i]["email"]}");
+                        row.RelativeItem().Text($"{cx.datos.Tables["usuarios"].Rows[i]["edad"]}");
+                        row.RelativeItem().Text($"{cx.datos.Tables["usuarios"].Rows[i]["nom_user"]}");
                     });
                     column.Item().PaddingVertical(5).LineHorizontal(0.5f).LineColor(Colors.Black);
                 }

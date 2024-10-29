@@ -96,7 +96,7 @@
           </div>--%>
             <div> <br />
                <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1"></asp:GridView>
-               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bdpruebaConnectionString2 %>" ProviderName="<%$ ConnectionStrings:bdpruebaConnectionString2.ProviderName %>" SelectCommand="SELECT * FROM [usuarios]"></asp:SqlDataSource>
+               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bdpruebaConnectionString %>" SelectCommand="SELECT * FROM [usuarios]"></asp:SqlDataSource>
             </div>
           </form>
       </div>
