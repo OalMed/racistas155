@@ -67,6 +67,7 @@
           
           <div>
             <asp:TextBox placeholder="Buscar usuario por ID" type="Number" autofocus ID="txtIdUser" runat="server" min="1" title="Ingrese un ID"></asp:TextBox>
+            <asp:Button class="accion btnEnviar" runat="server" OnClick="btnVerReport_Click" ID="btnVerReport" Text="Ver reporte" />
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnBuscar_Click" ID="btnBuscar" Text="Buscar"/>
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnUpdate_Click" ID="btnUpdate" Text="Modificar" Visible="False" />
             <asp:Button class="accion btnEnviar" runat="server" OnClick="btnEliminar_Click" ID="btnEliminar" Text="Eliminar" Visible="False" />
@@ -95,7 +96,7 @@
           </div>--%>
             <div> <br />
                <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1"></asp:GridView>
-               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bdpruebaConnectionString %>" ProviderName="<%$ ConnectionStrings:bdpruebaConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [usuarios]"></asp:SqlDataSource>
+               <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bdpruebaConnectionString2 %>" ProviderName="<%$ ConnectionStrings:bdpruebaConnectionString2.ProviderName %>" SelectCommand="SELECT * FROM [usuarios]"></asp:SqlDataSource>
             </div>
           </form>
       </div>

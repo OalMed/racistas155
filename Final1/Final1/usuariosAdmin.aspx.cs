@@ -4,6 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Final1
 {
@@ -14,6 +20,8 @@ namespace Final1
         {
             cx = new ConexionSQL("bdprueba");
             //cx = new ConexionSQL("bdprueba", "(local)");
+
+            QuestPDF.Settings.License = LicenseType.Community;
         }
         String strSQL, mensaje = "";
 
@@ -74,7 +82,7 @@ namespace Final1
 
                         //mostrarMsj = "<script>alert('" + mensaje + "')</script>";
                         //Response.Write(mostrarMsj);
-                        cx.makeAlertText(mensaje);
+                        Response.Write(cx.makeAlertText(mensaje));
                         continuar = false;
 
                         //Int32.Parse("45");
@@ -205,6 +213,74 @@ namespace Final1
             }
         }
 
+        protected void btnVerReport_Click(object sender, EventArgs e)
+        {
+            strSQL = "SELECT * FROM usuarios";
+            cx.Open();
+            if (cx.ejecutarQuery(strSQL, 4))
+            {
+                if (cx.datos.Tables["usuarios"].Rows.Count > 0)
+                {
+                    GenerarPDF();
+                }
+
+            }
+        }
+
+        public void GenerarPDF()
+        {
+            var doc = Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(30);
+                    page.Size(PageSizes.A4);
+                    page.DefaultTextStyle(x => x.FontSize(12));
+
+                    page.Header()
+                        .Text("Reporte de usuarios")
+                        .FontSize(18)
+                        .SemiBold()
+                        .AlignCenter();
+
+                    page.Content().Element(ComposeContent);
+                });
+            });
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                doc.GeneratePdf(stream);
+                stream.Position = 0;
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-disposition", "attachment;filename=ReporteUsuarios.pdf");
+                Response.Buffer = true;
+                stream.WriteTo(Response.OutputStream);
+                Response.End();
+            }
+
+            //Stream stream = new MemoryStream(doc);
+            //return File(stream, "application/pdf", "ReporteUsuarios.pdf");
+        }
+
+        void ComposeContent (IContainer container)
+        {
+            container.Column(column =>
+            {
+                for (int i = 0; i < cx.datos.Tables["usuarios"].Rows.Count; i++)
+                {
+                    column.Item().Row(row =>
+                    {
+                        row.RelativeItem().Text($"ID: {cx.datos.Tables["usuarios"].Rows[i]["id_user"]}");
+                        row.RelativeItem().Text($"Nombre: {cx.datos.Tables["usuarios"].Rows[i]["nombre"]}");
+                        row.RelativeItem().Text($"Email: {cx.datos.Tables["usuarios"].Rows[i]["email"]}");
+                        row.RelativeItem().Text($"Edad: {cx.datos.Tables["usuarios"].Rows[i]["edad"]}");
+                        row.RelativeItem().Text($"Nombre de usuario: {cx.datos.Tables["usuarios"].Rows[i]["nom_user"]}");
+                    });
+                    column.Item().PaddingVertical(5).LineHorizontal(0.5f).LineColor(Colors.Black);
+                }
+            });
+        }
+
         public Boolean Valido()
         {
             if (txtIdUser.Text == "")
@@ -216,4 +292,5 @@ namespace Final1
             }
         }
     }
+
 }
